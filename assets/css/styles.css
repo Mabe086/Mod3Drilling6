@@ -1,3 +1,7 @@
 body {
     background-image: linear-gradient(to right, #036922, #456800, #746000, #a34b00, #cf1100);
 }
+
+input[type="checkbox"]:checked {
+        border: 1px;
+  }
