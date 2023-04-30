@@ -1,9 +1,11 @@
+// Clase constructora para instanciar objetos de Bebidas
 function Bebida(nombre, precio) {
     this.nombre = nombre
     this.precio = precio
     this.seleccionado = false
 }
 
+// Clase constructora para instanciar objetos de Menú
 function Menu(nombre, precio,descripcion, foto) {
     this.nombre = nombre
     this.precio = precio
@@ -23,9 +25,7 @@ var listadoBebidas = [bebida1, bebida2, bebida3, bebida4]
 
 
 
-
-
-
+// Objetos para crear listado de Menú
 var menu1 = new Menu("Insalata de riso", 6750, "Ensalada para 2", "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-insalata-riso/_jcr_content/header-par/image_single.img.jpg/1629699129365.jpg")
 var menu2 = new Menu("Insalata al Cipollotti", 5990, "Ensalada para dos", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvTMqGi4K1OjOD6ZbwqwANP8bJoUQkHAaZniNPGuuW-LakKZ81K-WZeufoMD6qt2O7MM&usqp=CAU")
 var menu3 = new Menu("Insalata Caprese", 8250, "Ensalada para uno con oregano","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ9vtroNaJfOlDiLlYAvNSa7uAWnoPQCZROlkJcUSruLcLxX5lD58Xdll4w-kUb_gCfI4&usqp=CAU")
@@ -36,20 +36,26 @@ var listadoMenu = []
 listadoMenu.push(menu1, menu2, menu3)
 
 
+// Función utilizada para detectar cuando el usuario hace click en el check de una bebida
 function cambioBebida(indice, checkbox) {
-    var seleccionado = $(checkbox).prop('checked')
-    listadoBebidas[indice].seleccionado = seleccionado
+    var seleccionado = $(checkbox).prop('checked') // Consulta si el check que disparó el evento está checked o no
+    listadoBebidas[indice].seleccionado = seleccionado // Cambia en el arreglo de objetos la propiedad seleccionado al item de bebida que corresponde
     console.log(listadoBebidas);
 }
 
 function cambioMenu(indice, checkbox) {
     var seleccionado = $(checkbox).prop('checked')
-    listadoMenu[indice].seleccionado = seleccionado
+    listadoMenu[indice].seleccionado = seleccionado 
     console.log(listadoMenu);
 }
 
 
+
+
+
+
 $(document).ready(function(){
+    // Ciclo que muestra al usuario los items de bebidas
     listadoBebidas.forEach((bebida, index) => {
         $("#listado-bebidas").append(`
         <li class="list-group-item d-flex justify-content-between">
@@ -70,6 +76,7 @@ $(document).ready(function(){
     })
 
 
+    // Ciclo que muestra al usuario los items del Menu
     listadoMenu.forEach((menu, index) => {
         $("#listado-menu").append(`
             <li class="list-group-item">
