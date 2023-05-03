@@ -45,8 +45,8 @@ function cambioBebida(indice, checkbox) {
 
 function cambioMenu(indice, checkbox) {
     var seleccionado = $(checkbox).prop('checked')
-    listadoMenu[indice].seleccionado = seleccionado 
-    
+    listadoMenu[indice].seleccionado = seleccionado
+    calcularCuenta()
 }
 
 function calcularCuenta() {
@@ -76,9 +76,6 @@ function calcularCuenta() {
 
     $("#total").html(`$${total.toLocaleString('es-CL')}`)
 }
-
-
-
 
 
 $(document).ready(function(){
