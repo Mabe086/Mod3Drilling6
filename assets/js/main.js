@@ -40,15 +40,42 @@ listadoMenu.push(menu1, menu2, menu3)
 function cambioBebida(indice, checkbox) {
     var seleccionado = $(checkbox).prop('checked') // Consulta si el check que disparó el evento está checked o no
     listadoBebidas[indice].seleccionado = seleccionado // Cambia en el arreglo de objetos la propiedad seleccionado al item de bebida que corresponde
-    console.log(listadoBebidas);
+    calcularCuenta()
 }
 
 function cambioMenu(indice, checkbox) {
     var seleccionado = $(checkbox).prop('checked')
     listadoMenu[indice].seleccionado = seleccionado 
-    console.log(listadoMenu);
+    
 }
 
+function calcularCuenta() {
+    var total = 0
+    var seleccionados = listadoBebidas.filter(bebida => bebida.seleccionado)
+    $("#total-cuenta tbody").html("")
+    seleccionados.forEach(item => {
+        total = total + item.precio
+        $("#total-cuenta tbody").append(`
+            <tr>
+                <td>${item.nombre}</td>
+                <td class="text-end fw-bold">$${item.precio.toLocaleString('es-CL')}</td>
+            </tr>
+        `)
+    })
+
+    var seleccionados = listadoMenu.filter(menu => menu.seleccionado)
+    seleccionados.forEach(item => {
+        total += item.precio
+        $("#total-cuenta tbody").append(`
+            <tr>
+                <td>${item.nombre}</td>
+                <td class="text-end fw-bold">$${item.precio.toLocaleString('es-CL')}</td>
+            </tr>
+        `)
+    })
+
+    $("#total").html(`$${total.toLocaleString('es-CL')}`)
+}
 
 
 
@@ -63,10 +90,10 @@ $(document).ready(function(){
                 <input 
                 class="form-check-input" 
                 type="checkbox" value="" 
-                id="flexCheckDefault"
+                id="checkBebida${index}"
                 onChange="cambioBebida(${index}, this)"
                 >
-                <label class="form-check-label" for="flexCheckDefault">
+                <label class="form-check-label" for="checkBebida${index}">
                 ${bebida.nombre}
                 </label>
             </div>
@@ -84,10 +111,10 @@ $(document).ready(function(){
                     <input 
                     class="form-check-input" 
                     type="checkbox" value="" 
-                    id="flexCheckDefault"
+                    id="cambioMenu(${index}"
                     onChange="cambioMenu(${index}, this)"
                     >
-                    <label class="form-check-label fw-bold" for="flexCheckDefault">
+                    <label class="form-check-label fw-bold" for="cambioMenu(${index}">
                         ${menu.nombre}
                     </label>
                 </div>
